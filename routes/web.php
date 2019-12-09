@@ -15,8 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/mark', 'HomeController@index')->name('mark');
+Route::get('/planning', 'HomeController@index')->name('planning');
+Route::get('/record', 'HomeController@index')->name('record');
+
+//Route::get('/ajaxRequest', 'HomeController@ajaxRequest');
+Route::post('/ajaxRequest', 'HomeController@ajaxRequestPost');
+
+Route::post('/ajaxAddCategory', 'HomeController@ajaxAddCategory');

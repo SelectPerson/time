@@ -1,8 +1,7 @@
 @extends('layouts.app')
-
 @section('content')
     @if (session('status'))
         {{ session('status') }}
     @endif
-    @include('main.index')
+    @include('main.record')
 @endsection

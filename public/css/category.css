@@ -28,7 +28,7 @@ span.category__span {
 }
 
 .category__arrow {
-	line-height: 70px;
+	line-height: 64px;
 }
 
 /* Category List */
@@ -38,16 +38,18 @@ ul.category__list {
 	width: 90%;
 	height: 300px;
 	display: none;
+    background-color: white;
 }
 
 li.category__elem {
-	
+
 	background-color: white;
 	padding: 20px 40px;
 	cursor: pointer;
 	box-sizing: border-box;
 	height: 60px;
-	margin-top: 1px;
+    border-top: solid 1px #c1c4c8;
+	/*margin-top: 1px;*/
 	font-size: 16px;
 	font-weight: bold;
 	overflow: hidden;
@@ -63,7 +65,7 @@ li.category__elem {
 	border-radius: 10px;
 	font-weight: normal;
 	color: grey;
-	width: calc(100% - 7px);
+	width: calc(100% - 0px);
 }
 
 .add_category {
@@ -72,8 +74,8 @@ li.category__elem {
 }
 
 .add_category__inner {
-	
-	width: 74%;
+
+	width: 82%;
 	margin: auto;
 	padding: 20px 0;
 	display: -webkit-flex;

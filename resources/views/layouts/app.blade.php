@@ -8,7 +8,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    {{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/category.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/markbook.css') }}">
+
+
 
 </head>
 <body>
@@ -70,7 +73,8 @@
     </div>
 @yield('content')
 </body>
-<script src="js/jquery.js"></script>
-<script src="js/script.js"></script>
-<script src="js/data.js"></script>
+<script src="{{ asset('js/jquery.js') }}"></script>
+<script src="{{ asset('js/script.js') }}"></script>
+<script src="{{ asset('js/data.js') }}"></script>
+
 </html>
