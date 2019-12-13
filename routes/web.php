@@ -24,5 +24,11 @@ Route::get('/record', 'HomeController@index')->name('record');
 
 //Route::get('/ajaxRequest', 'HomeController@ajaxRequest');
 Route::post('/ajaxRequest', 'HomeController@ajaxRequestPost');
-
+//
 Route::post('/ajaxAddCategory', 'HomeController@ajaxAddCategory');
+//
+Route::post('/ajaxAddMarkBook', 'HomeController@ajaxAddMarkBook');
+//
+Route::post('/ajaxSelectMarkBook','HomeController@ajaxSelectMarkBook');
+
+

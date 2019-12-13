@@ -1,13 +1,75 @@
 $(document).ready(function() {
-
     $('.category__inner').on('click', function() {
         // $('.category__list').slideToggle(500);
         $(this).next().fadeToggle();
 
     });
-    $('li.category__elem').on('click', function() {
-        $(this).toggleClass('category__elem__select');
+    let CategoryElem = document.querySelectorAll('li.category__elem');
+    let listElem = [];
+    let boolCategory = 0;
+
+    for(let i = 0; i < CategoryElem.length; i++) {
+
+        if(CategoryElem[i].classList[1] === 'category__elem__select') {
+            listElem[i] = true;
+            boolCategory++;
+        }
+        CategoryElem[i].addEventListener('click',function () {
+
+            CategoryElem[i].classList.toggle('category__elem__select');
+            if(!listElem[i]) {
+                listElem[i] = true;
+                boolCategory++;
+            }
+            else {
+                listElem[i] = false;
+                boolCategory--;
+
+            }
+
+            document.querySelector('span.category__span').innerHTML = 'Категорія: вибрано: '+'('+boolCategory+')';
+
+
+
+        });
+    }
+
+    /* Category Mark */
+
+    $('.save_category_mark').on('click',function(e) {
+       let recordData = [];
+       let count = 0;
+       for(let i = 0; i < CategoryElem.length; i++) {
+           if(listElem[i] == true) {
+               e.preventDefault();
+               recordData[count] = CategoryElem[i].innerHTML;
+               // console.log(CategoryElem[i].innerHTML);
+               count++;
+           }
+       }
+       let test = recordData;
+
+
+        $.ajax({
+            type:'POST',
+            url:'/ajaxSelectMarkBook',
+            data: { test: test },
+            dataType: 'html',
+            // data:{name:name, password:password, email:email},
+
+            success:function(data){
+                console.log(data);
+            }
+        });
     });
+
+
+
+    // $('li.category__elem').on('click', function() {
+    //     $(this).toggleClass('category__elem__select');
+    //     $('.category__span').html('test');
+    //
+    // });
     // Add MarkBook
     $('button#add__markbook').on('click', function() {
         $('#save__markbook').toggle();
@@ -76,18 +138,57 @@ $.ajaxSetup({
 
 });
 
-$('#save__markbook').on('click',function (e) {
+
+
+$('#add_category__button').on('click',function (e) {
     e.preventDefault();
-    let title = $('#markbook_title');
 
-    $('.elem_record_error').hide();
-    if(title == '')return $('#markbook_title').before('<h4 style="color: red; margin-left: 20px; margin-bottom: 20px;" class="elem_record_error">Заповніть поле</h4>');
-
+    let nameCategory = $('#name_category').val();
+    if(nameCategory == '') return $('.add_category__inner').before('<h3 style="color: red; margin-left: 10%;">Заповніть поле</h3>');
     $.ajax({
+
         type:'POST',
         url:'/ajaxAddCategory',
-        data: {
+        data: { nameCategory: nameCategory },
+        // data:{name:name, password:password, email:email},
 
+        success:function(data){
+            console.log(data);
+        }
+    });
+});
+
+let getCategorySpan;
+
+$('.add_select_mark').on('click',function() {
+    $('#category_mark').html('Категорія: '+$(this).html());
+    $('.category__markbook__elem').hide();
+    getCategorySpan = $(this).html();
+});
+
+$('#save__markbook').on('click',function (e) {
+    e.preventDefault();
+    let title = $('#markbook_title').val();
+    let getSpan = getCategorySpan;
+    let linkMark = $('#link_mark').val();
+    let aboutMark = $('#add__markboob__textarea').val();
+    $('.elem_record_error').hide();
+
+    if(title === '') return $('#markbook_title').before('<h4 style="color: red; margin-left: 20px; margin-bottom: 20px;" class="elem_record_error">Заповніть поле</h4>');
+    if(linkMark === '') { linkMark = 'Посилання відстунє'; }
+    if(aboutMark === '') { aboutMark = 'Опис відустній'; }
+    if(getSpan === undefined) {
+        getSpan = 'Відсутня';
+    }
+    $.ajax({
+
+        type:'POST',
+        url:'/ajaxAddMarkBook',
+        data: {
+            title: title,
+            getSpan: getSpan,
+            linkMark: linkMark,
+            aboutMark: aboutMark
         },
         // data:{name:name, password:password, email:email},
 

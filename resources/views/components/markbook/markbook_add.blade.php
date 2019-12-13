@@ -7,20 +7,21 @@
                     <input type="text" placeholder="Зміст" class="right__add__markbook__input" id="markbook_title">
                 </li>
                 <li class="add__window__main__elem">
-                    <input type="text" placeholder="Посилання" class="right__add__markbook__input">
+                    <input type="text" placeholder="Посилання" class="right__add__markbook__input" id="link_mark">
                 </li>
                 <li class="add__window__main__elem">
                     <div class="category category__markbook">
                         <div class="category__inner category__markbook__inner">
-                            <span class="category__span">Категорія: вибрано (100)</span>
+                            <span class="category__span" id="category_mark">Категорія: не визначено</span>
                             @include('components.arrow')
                         </div>
                         <ul class="category__list category__markbook__elem" style="width: 99%;">
-                            <li class="category__elem" style="border-top: 0">Всі</li>
-                            @foreach($getCategoryMark as $category_elem)
-                                <li class="category__elem">{{ $category_elem->name }}</li>
+                            <li class="category__elem" style="border-top: 0">Без категорії</li>
+                            @foreach($getCategoryAll as $category_elem)
+                               <li class="category__elem add_select_mark" id="add_select_mark">{{ $category_elem->name }}</li>
                             @endforeach
                         </ul>
+
                     </div>
                 </li>
                 <li class="add__window__main__elem">
@@ -37,3 +38,5 @@
     @include('components.add_category')
     <button id="save_markbook">Зберегти дані</button>
 </div>
+<script src="{{ asset('js/jquery.js') }}"></script>
+<script src="{{ asset('js/category.js') }}"></script>

@@ -1,27 +1,30 @@
 <h2 class="main__right__title__h2">Мої закладки</h2>
 <ul class="main__right__bookmark">
-    <li class="main__right__bookmark__elem">
-        <h2>Зміст:</h2>
-        <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet sint, perspiciatis! Aliquam ducimus voluptatum iusto fugit consequatur ullam, laborum dolor, ratione magnam, expedita labore, tempora veritatis temporibus vero molestias ab dolore cum provident. Sapiente neque explicabo, nisi a quasi voluptates?</h3>
-        <h3>Категорія: PHP</h3>
-        <a href="#">Детальніше</a>
-    </li>
-    <li class="main__right__bookmark__elem">
-        <h2>Зміст:</h2>
-        <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti quo ut fugit mollitia, deleniti distinctio dolore voluptates iusto beatae quasi.</h3>
-        <h3>Категорія: PHP</h3>
-        <a href="#">Детальніше</a>
-    </li>
-    <li class="main__right__bookmark__elem">
-        <h2>Зміст:</h2>
-        <h3>Текст про зміст</h3>
-        <h3>Категорія: PHP</h3>
-        <a href="#">Детальніше</a>
-    </li>
-    <li class="main__right__bookmark__elem">
-        <h2>Зміст:</h2>
-        <h3>Текст про зміст</h3>
-        <h3>Категорія: PHP</h3>
-        <a href="#">Детальніше</a>
-    </li>
+    @foreach($getListMark as $getElem)
+        <li class="main__right__bookmark__elem">
+
+            <h4>Зміст</h4>
+            <h5>{{ $getElem->title }}</h5>
+            <h3>Опис</h3>
+            <h5>{{$getElem->about }} </h5>
+            <h3>Посилання</h3>
+            <h5>{{$getElem->link }}</h5>
+            <h3>Категорія</h3>
+            <h5>{{ $getElem->category_name }}</h5>
+            <a href="#">Детальніше</a>
+            <h3 class="priority__list priority__list__planning" id="priority__list__planning">
+                <span class="pririty__list__first">Пріоритет:</span>
+                <div class="pririty__list__second">
+                    <svg style="transform: rotate(90deg);" class="section-question__icon" width="10.54" height="24" viewBox="0 0 10.54 24"><polyline points="1.49 21.25 9.05 12 1.49 2.75" fill="none" stroke="white" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5"></polyline></svg>
+                </div>
+
+            </h3>
+            <ul class="priority__select">
+                <li class="priority__select__elem">Підняти в топ</li>
+                <li class="priority__select__elem">Підняти вверх</li>
+                <li class="priority__select__elem">Опустити в низ</li>
+                <li class="priority__select__elem">Опустити в кінець</li>
+            </ul>
+        </li>
+    @endforeach
 </ul>

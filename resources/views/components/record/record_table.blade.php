@@ -14,8 +14,8 @@
         <li class="main__right__list__elem">{{ $getDayElem->from_time }}</li>
         <li class="main__right__list__elem">{{ $getDayElem->to_time }}</li>
         <li class="main__right__list__elem">{{ $getDayElem->effective_time }}</li>
-        <li class="main__right__list__elem">{{ $getDayElem->category }}</li>
-
+{{--        <li class="main__right__list__elem">{{ $getDayElem->category }}</li>--}}
+        <li class="main__right__list__elem">PHP</li>
     </ul>
 @endforeach
 
