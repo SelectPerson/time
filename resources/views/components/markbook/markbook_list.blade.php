@@ -1,15 +1,15 @@
 <h2 class="main__right__title__h2">Мої закладки</h2>
 <ul class="main__right__bookmark">
-    @foreach($getListMark as $getElem)
+    @foreach($getJoinCategory as $getElem)
         <li class="main__right__bookmark__elem">
 
-            <h4>Зміст</h4>
+            <h4 style="background-color: blue; width: 60%; padding: 8px 14px; color: white;">Зміст</h4>
             <h5>{{ $getElem->title }}</h5>
-            <h3>Опис</h3>
+            <h4 style="background-color: blue; width: 60%; padding: 8px 14px; color: white;">Опис</h4>
             <h5>{{$getElem->about }} </h5>
-            <h3>Посилання</h3>
+            <h4 style="background-color: blue; width: 60%; padding: 8px 14px; color: white;">Посилання</h4>
             <h5>{{$getElem->link }}</h5>
-            <h3>Категорія</h3>
+            <h4 style="background-color: blue; width: 60%; padding: 8px 14px; color: white;">Категорія</h4>
             <h5>{{ $getElem->category_name }}</h5>
             <a href="#">Детальніше</a>
             <h3 class="priority__list priority__list__planning" id="priority__list__planning">

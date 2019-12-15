@@ -27,19 +27,21 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $user = \Auth::user();
-        $getJoinCategory = DB::table('markbook')->join('category',function($join) {
+        $getJoinCategory = DB::table('category')->join('markbook',function($join) {
             $join->on('category_name','=','name')->where(
                 [
                     'category_mark'=> 1,
                     'category.user_id' => \Auth::user()->id
                 ]);
-        })->get();
-        //dd($getJoinCategory);
-        $getDay = DB::table('day_record')->where('user_id', $user->id)->get();
+        })->OrderBy('markbook.id','DESC')->get();
+//        dd($getJoinCategory);
+//        ->OrderBy('id','DESC')
+        $getDay = DB::table('day_record')->where('user_id', $user->id)->OrderBy('id','DESC')->get();
+//        dd($getDay);
         // getCategory
         $getCategoryAll = DB::table('category')->where(
             ['user_id' => $user->id]
-        )->get();
+        )->orderBy('id', 'asc')->get();
 
         $getCategoryMark = DB::table('category')->where(
             ['user_id' => $user->id])
@@ -48,10 +50,10 @@ class HomeController extends Controller
         $getCategoryPlanning = DB::table('category')->where(['user_id' => $user->id, 'category_planning' => 1])->get();
 
         $getCategoryRecord = DB::table('category')->where(['user_id' => $user->id, 'category_record' => 1])->get();
-
+//        dd($getCategoryRecord);
         $getCountMark = DB::table('category')->where(['user_id' => $user->id, 'category_mark' => 1])->count();
         //
-        $getListMark = DB::table('markbook')->where(['user_id' => $user->id])->get();
+//        $getListMark = DB::table('markbook')->where(['user_id' => $user->id])->get();
 
 
         return view($request->route()->getName() ,[
@@ -63,7 +65,7 @@ class HomeController extends Controller
             // Count
             'getCountMark' => $getCountMark,
             // GetListMark
-            'getListMark' => $getListMark
+            'getJoinCategory' => $getJoinCategory
 
         ]);
     }
@@ -102,7 +104,7 @@ class HomeController extends Controller
     public function ajaxAddCategory(Request $request) {
         $nameCategory = $request->input('nameCategory');
         $user = \Auth::user();
-        $boolCategory = DB::table('category')->where('name', $nameCategory)->first();
+        $boolCategory = DB::table('category')->where(['name' => $nameCategory, 'user_id' => $user->id])->first();
         if(!$boolCategory) {
             DB::table('category')->insert([
                 'name' => $nameCategory,
@@ -122,39 +124,5 @@ class HomeController extends Controller
 //            'category_mark' => 1
 //        ]);
     }
-    public function ajaxAddMarkBook(Request $request) {
-        $user = \Auth::user();
-        $title = $request->input('title');
-        $getSpan = $request->input('getSpan');
-        $linkMark = $request->input('linkMark');
-        $aboutMark = $request->input('aboutMark');
-        DB::table('markbook')->insert([
-            'title' => $title,
-            'user_id' => $user->id,
-            'category_name' => $getSpan,
-            'link' => $linkMark,
-            'about' => $aboutMark
-        ]);
 
-//        return $getSpan;
-    }
-    public function ajaxSelectMarkBook(Request $request) {
-        $user = \Auth::user();
-        $test = $request->input('test');
-        $getData = [];
-
-        var_dump(json_decode($test, true));
-//        $getData = json_decode(file_get_contents($test));
-        // $getData = DB::table('category')->where('name',json_each($test))->update(['category_mark' => true]);
-        // $getData = DB::table('category')->update(['category_mark' => false]);
-
-        for($i = 1; $i < 12; $i++) {
-
-        }
-
-//        $getData = DB::table('category')->update(['name->test' => true]);
-        //return $getData;
-
-
-    }
 }

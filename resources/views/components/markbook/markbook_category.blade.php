@@ -37,9 +37,6 @@
             }
         </style>
     </div>
-    @section('SelectMark')
-        <script src="{{ asset('js/ajaxSelectMark.js') }}"></script>
-    @endsection
     <div class="main__right__button__inner">
         <button class="main__right__button" id="add__markbook">Додати</button>
         <button class="main__right__button__save" id="save__markbook" style="display: none;">Зберегти</button>

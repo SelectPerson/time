@@ -35,33 +35,39 @@ $(document).ready(function() {
     }
 
     /* Category Mark */
-
-    $('.save_category_mark').on('click',function(e) {
-       let recordData = [];
-       let count = 0;
-       for(let i = 0; i < CategoryElem.length; i++) {
-           if(listElem[i] == true) {
-               e.preventDefault();
-               recordData[count] = CategoryElem[i].innerHTML;
-               // console.log(CategoryElem[i].innerHTML);
-               count++;
+    SaveCateory();
+    function SaveCateory(categoryName,categoryUrl) {
+        $('.save_category_mark').on('click',function(e) {
+           let recordData = [];
+           let count = 0;
+           for(let i = 0; i < CategoryElem.length; i++) {
+               if(listElem[i] == true) {
+                   e.preventDefault();
+                   recordData[count] = CategoryElem[i].innerHTML;
+                   // console.log(CategoryElem[i].innerHTML);
+                   count++;
+               }
            }
-       }
-       let test = recordData;
+           let test = recordData;
 
 
-        $.ajax({
-            type:'POST',
-            url:'/ajaxSelectMarkBook',
-            data: { test: test },
-            dataType: 'html',
-            // data:{name:name, password:password, email:email},
+            $.ajax({
+                type:'POST',
+                url:'/ajaxSelectMarkBook',
+                data: { test: test },
+                dataType: 'html',
+                // data:{name:name, password:password, email:email},
 
-            success:function(data){
-                console.log(data);
-            }
+                success:function(data){
+                    console.log(data);
+                    location.reload(true);
+
+
+                }
+
+            });
         });
-    });
+    }
 
 
 
@@ -154,6 +160,7 @@ $('#add_category__button').on('click',function (e) {
 
         success:function(data){
             console.log(data);
+            // location.reload(true);
         }
     });
 });
@@ -194,6 +201,7 @@ $('#save__markbook').on('click',function (e) {
 
         success:function(data){
             console.log(data);
+            location.reload(true);
         }
     });
 });
@@ -231,6 +239,7 @@ $("#save__record").click(function(e){
 
         success:function(data){
             console.log(data);
+            location.reload(true);
         }
     });
 });

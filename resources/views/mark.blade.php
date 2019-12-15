@@ -5,3 +5,8 @@
     @endif
     @include('main.bookmark')
 @endsection
+
+@section('SelectMark')
+    <script src="{{ asset('js/ajax/markbook.js') }}"></script>
+@endsection
+
