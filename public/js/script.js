@@ -4,46 +4,48 @@ $(document).ready(function() {
         $(this).next().fadeToggle();
 
     });
-    let CategoryElem = document.querySelectorAll('li.category__elem');
+    let CategoryElem = document.querySelectorAll('li.category__elem__mark');
     let listElem = [];
     let boolCategory = 0;
-
-    for(let i = 0; i < CategoryElem.length; i++) {
-
-        if(CategoryElem[i].classList[1] === 'category__elem__select') {
-            listElem[i] = true;
-            boolCategory++;
-        }
-        CategoryElem[i].addEventListener('click',function () {
-
-            CategoryElem[i].classList.toggle('category__elem__select');
-            if(!listElem[i]) {
+    CategorySelect();
+    function CategorySelect() {
+        for(let i = 0; i < CategoryElem.length; i++) {
+            if(CategoryElem[i].classList[1] === 'category__elem__select') {
                 listElem[i] = true;
                 boolCategory++;
             }
-            else {
-                listElem[i] = false;
-                boolCategory--;
+            CategoryElem[i].addEventListener('click',function () {
 
-            }
+                CategoryElem[i].classList.toggle('category__elem__select');
+                if(!listElem[i]) {
+                    listElem[i] = true;
+                    boolCategory++;
+                }
+                else {
+                    listElem[i] = false;
+                    boolCategory--;
 
-            document.querySelector('span.category__span').innerHTML = 'Категорія: вибрано: '+'('+boolCategory+')';
+                }
+
+                document.querySelector('span.category__span').innerHTML = 'Категорія: вибрано: '+'('+boolCategory+')';
 
 
 
-        });
+            });
+        }
     }
 
+
     /* Category Mark */
-    SaveCateory();
+    SaveCateory(CategoryElem,'/ajaxSelectMarkBook');
     function SaveCateory(categoryName,categoryUrl) {
         $('.save_category_mark').on('click',function(e) {
            let recordData = [];
            let count = 0;
-           for(let i = 0; i < CategoryElem.length; i++) {
+           for(let i = 0; i < categoryName.length; i++) {
                if(listElem[i] == true) {
                    e.preventDefault();
-                   recordData[count] = CategoryElem[i].innerHTML;
+                   recordData[count] = categoryName[i].innerHTML;
                    // console.log(CategoryElem[i].innerHTML);
                    count++;
                }
@@ -53,7 +55,7 @@ $(document).ready(function() {
 
             $.ajax({
                 type:'POST',
-                url:'/ajaxSelectMarkBook',
+                url: categoryUrl,
                 data: { test: test },
                 dataType: 'html',
                 // data:{name:name, password:password, email:email},

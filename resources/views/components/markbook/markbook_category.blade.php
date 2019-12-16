@@ -5,14 +5,13 @@
             @include('components.arrow')
         </div>
        <ul class="category__list">
-            <li class="category__elem">Всі</li>
             @foreach($getCategoryMark as $category_elem)
                @if ($category_elem->category_mark == 1)
-                   <li class="category__elem category__elem__select">
+                   <li class="category__elem category__elem__select category__elem__mark">
                        {{ $category_elem->name }}
                    </li>
                @elseif ($category_elem->category_mark == 0)
-                   <li class="category__elem">
+                   <li class="category__elem category__elem__mark">
                        {{ $category_elem->name }}
                    </li>
                @endif
