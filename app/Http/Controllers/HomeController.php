@@ -27,6 +27,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $user = \Auth::user();
+        // MarkBook
         $getJoinCategory = DB::table('category')->join('markbook',function($join) {
             $join->on('category_name','=','name')->where(
                 [
@@ -34,6 +35,14 @@ class HomeController extends Controller
                     'category.user_id' => \Auth::user()->id
                 ]);
         })->OrderBy('markbook.id','DESC')->get();
+        // Planning
+        $getJoinCategoryPlanning = DB::table('category')->join('planning',function($join) {
+            $join->on('category_name','=','name')->where(
+                [
+                    'category_planning'=> 1,
+                    'category.user_id' => \Auth::user()->id
+                ]);
+        })->OrderBy('planning.id','DESC')->get();
 //        dd($getJoinCategory);
 //        ->OrderBy('id','DESC')
         $getDay = DB::table('day_record')->where('user_id', $user->id)->OrderBy('id','DESC')->get();
@@ -65,7 +74,9 @@ class HomeController extends Controller
             // Count
             'getCountMark' => $getCountMark,
             // GetListMark
-            'getJoinCategory' => $getJoinCategory
+            'getJoinCategory' => $getJoinCategory,
+            // GetListPlanning
+            'getJoinCategoryPlanning' => $getJoinCategoryPlanning
 
         ]);
     }

@@ -4,11 +4,21 @@ $(document).ready(function() {
         $(this).next().fadeToggle();
 
     });
-    let CategoryElem = document.querySelectorAll('li.category__elem__mark');
-    let listElem = [];
-    let boolCategory = 0;
-    CategorySelect();
-    function CategorySelect() {
+    /*MarkBook*/
+    let CategoryElemMark = document.querySelectorAll('li.category__elem__mark');
+    let listElemMark = [];
+    let boolCategoryMark = 0;
+    CategorySelect(CategoryElemMark,listElemMark,boolCategoryMark);
+    SaveCateory(CategoryElemMark,'/ajaxSelectMarkBook',listElemMark,'.save_category_mark');
+    /*Planning*/
+    let CategoryElemPlanning = document.querySelectorAll('li.category__elem__planning');
+    let listElemPlanning = [];
+    let boolCategoryPlanning = 0;
+    //
+
+    //
+
+    function CategorySelect(CategoryElem,listElem,boolCategory) {
         for(let i = 0; i < CategoryElem.length; i++) {
             if(CategoryElem[i].classList[1] === 'category__elem__select') {
                 listElem[i] = true;
@@ -26,20 +36,13 @@ $(document).ready(function() {
                     boolCategory--;
 
                 }
-
                 document.querySelector('span.category__span').innerHTML = 'Категорія: вибрано: '+'('+boolCategory+')';
-
-
-
             });
         }
     }
-
-
     /* Category Mark */
-    SaveCateory(CategoryElem,'/ajaxSelectMarkBook');
-    function SaveCateory(categoryName,categoryUrl) {
-        $('.save_category_mark').on('click',function(e) {
+    function SaveCateory(categoryName,categoryUrl,listElem,saveElem) {
+        $(saveElem).on('click',function(e) {
            let recordData = [];
            let count = 0;
            for(let i = 0; i < categoryName.length; i++) {
@@ -51,9 +54,7 @@ $(document).ready(function() {
                }
            }
            let test = recordData;
-
-
-            $.ajax({
+           $.ajax({
                 type:'POST',
                 url: categoryUrl,
                 data: { test: test },
@@ -66,8 +67,7 @@ $(document).ready(function() {
 
 
                 }
-
-            });
+           });
         });
     }
 
